@@ -399,7 +399,7 @@ CASE
 END AS valor
 FROM empresa e, carro c, viagem v 
 WHERE e.id = c.idEmpresa 
-
+	AND c.id = v.idCarro
 
 
 
