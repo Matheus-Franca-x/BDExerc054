@@ -314,7 +314,7 @@ INSERT INTO viagem VALUES
 
 
 --Exercícios
---Apresentar marca e modelo de carro e a soma total da distância percorrida pelos carros,
+--1) Apresentar marca e modelo de carro e a soma total da distância percorrida pelos carros,
 --em viagens, de uma dada empresa, ordenado pela distância percorrida
 SELECT c.marca, c.modelo, SUM(v.distanciaPercorrida) AS distanciaPercorrida
 FROM carro c, viagem v, empresa e 
@@ -323,7 +323,7 @@ WHERE v.idCarro = c.id
 GROUP BY c.marca, c.modelo
 ORDER BY distanciaPercorrida ASC
 
---Apresentar nome das empresas cuja soma total da distância percorrida pelos carros,
+--2) Apresentar nome das empresas cuja soma total da distância percorrida pelos carros,
 --em viagens, é superior a 50000 km
 SELECT e.nome
 FROM empresa e, carro c, viagem v 
@@ -332,7 +332,7 @@ WHERE e.id = c.idEmpresa
 GROUP BY e.nome
 HAVING SUM(v.distanciaPercorrida) > 50000
 
---Apresentar nome das empresas cuja soma total da distância percorrida pelos carros
+--3) Apresentar nome das empresas cuja soma total da distância percorrida pelos carros
 --e a media das distâncias percorridas por seus carros em viagens.
 --A média deve ser exibida em uma coluna chamada mediaDist e com 2 casas decimais apenas.
 --Deve-se ordenar a saída pela média descrescente
@@ -344,7 +344,7 @@ WHERE e.id = c.idEmpresa
 GROUP BY e.nome
 ORDER BY media_dist DESC
 
---Apresentar nome das empresas cujos carro percorreram a maior distância dentre as cadastradas
+--4) Apresentar nome das empresas cujos carro percorreram a maior distância dentre as cadastradas
 
 SELECT e.nome, MAX(v.distanciaPercorrida) AS maior_dist
 FROM empresa e, carro c, viagem v 
@@ -352,7 +352,7 @@ WHERE e.id = c.idEmpresa
 	AND c.id = v.idCarro 
 GROUP BY e.nome 
 	
---Apresentar nome das empresas e a quantidade de carros cadastrados para cada empresa
+--5) Apresentar nome das empresas e a quantidade de carros cadastrados para cada empresa
 --Desde que a empresa tenha 3 ou mais carros
 --A saída deve ser ordenada pela quantidade de carros, descrescente
 
@@ -363,21 +363,21 @@ GROUP BY e.nome
 HAVING COUNT(c.id) >= 3
 ORDER BY quantidade DESC
 
---Consultar Nomes das empresas que não tem carros cadastrados
+--6) Consultar Nomes das empresas que não tem carros cadastrados
 
 SELECT e.nome 
 FROM empresa e 
 LEFT JOIN carro c ON e.id = c.idEmpresa
 WHERE c.id IS NULL 
 
---Consultar Marca e modelos dos carros que não fizeram viagens
+--7) Consultar Marca e modelos dos carros que não fizeram viagens
 
 SELECT c.marca, c.modelo 
 FROM carro c 
 LEFT JOIN viagem v ON c.id = v.idCarro 
 WHERE v.idCarro IS NULL
 
---Consultar quantas viagens foram feitas por cada carro (marca e modelo) de cada empresa
+--8) Consultar quantas viagens foram feitas por cada carro (marca e modelo) de cada empresa
 --em ordem ascendente de nome de empresa e descendente de quantidade
 
 SELECT COUNT(v.idCarro) AS viagens, c.modelo , c.marca, e.nome
@@ -387,7 +387,7 @@ WHERE e.id = c.idEmpresa
 GROUP BY c.modelo, c.marca, e.nome 
 ORDER BY e.nome ASC, viagens DESC
 
---Consultar o nome da empresa, a marca e o modelo do carro, a distância percorrida
+--9) Consultar o nome da empresa, a marca e o modelo do carro, a distância percorrida
 --e o valor total ganho por viagem, sabendo que para distâncias inferiores a 1000 km, o valor é R$10,00
 --por km e para viagens superiores a 1000 km, o valor é R$15,00 por km.
 
